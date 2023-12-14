@@ -253,3 +253,17 @@ buttonOldest.addEventListener("click", () => {
 
   renderCars(clonedCars); // 4.punkts. Skat.augstāk, kā veidota funkcija renderCars()
 });
+
+// 7.punkts. Kodējam notikumus priekš buttonLatest, līzīgi kā augstāk bija priekš buttonOldest
+buttonLatest.addEventListener("click", () => {
+  const clonedCars = [...cars]; // Atkal klonējam (var izmantot to pašu nosaukumu, jo nebļaus, jo esam jau ārpus buttonOldest.addEvent.... scop'a!), jo iekļaut [...cloned] uzreiz sortēšanas funkcijā neizdevās. JO pats par sevis [...cloned] nesaglabā rezultātu nekur. Tāpēc vispirms jāsaglabā konstante, un tikai pēc tam darbojamies ar to konstanti.
+  clonedCars.sort((a, b) => b.year - a.year); // Sortējam (tāpat kā 2.punktā), BET pamainam funkcijas bodijā parametrus vietām! Lai ir descending order. Nemainam funkcijas galvā jeb iekavās!!! Jo tad sistēma domās, ka jāsortē ascending orderī.
+  carsWrapper.innerHTML = ""; // Iztīram html pirms rādīt sasortētu klonēto masīvu (tāpat kā 3.punktā)
+  renderCars(clonedCars); // Izvadam klonēto un jau sasortētu masīvu (tāpat kā 4.punktā)
+});
+/* Var saīsināt kodu, ja nevis atsevišķi veido klonu un to sortē, bet veido sortēšanas konstanti un tajā iekļauj gan klonēšanu, gan sortēšanas funkciju. Tikai tad būs jāizvada šī konstante.
+buttonLatest.addEventListener("click", () => {
+  const sortedCars = [...cars].sort((a, b) => b.year - a.year);
+  carsWrapper.innerHTML = ""; 
+  renderCars(sortedCars);
+}) */
