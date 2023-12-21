@@ -180,15 +180,15 @@ cars.forEach((car) => {
   <div class="car">
     <span class="car__brand">Brand: ${car.make}</span>
     <span class="car__model">Model: ${car.model}</span>
-    <span class="car__release-Year">Year: ${car.year}</span>
+    <span class="car__release-year">Year: ${car.year}</span>
   </div>
   `;
 });
 Šis vēlāks būs ņemts kā template, kad veidosim daudzreiz izmantojamu funkciju 5.punktā. Un ar to brīdi šo daļu var iekomentēt vai dzēst.
  */
 
-type Cars =
-  typeof cars; /* 5.1. Taisam tipu priekš Cars, lai no masīva cars, kas ir definēts augstāk, ieliktu tā tipu iekš const renderCars. Šīir TS fiška jeb ir veids, kā ātri var izveidot tipu. Vēl varētu klasiski kopēt datus no masīva objekta, kas nebūtu ātri, un tas izskatītos šādi: 
+type Cars = typeof cars; // 5.1. Taisam tipu priekš Cars, lai no masīva cars, kas ir definēts augstāk, ieliktu tā tipu iekš const renderCars.
+/*Šī ir TS fiška jeb ir veids, kā ātri var izveidot tipu. Vēl varētu klasiski kopēt datus no masīva objekta, kas nebūtu ātri, un tas izskatītos šādi: 
 type Cars = {
   make: string;
   model: string;
@@ -212,13 +212,17 @@ type Cars = {
 }  */
 
 const renderCars = (carsArr: Cars) => {
-  // 5. Veidojam funkciju, lai izvairītos no DRY (do not repeat yourself), t.i.lai aizvietotu kodu, kas izveido html elementus un ieliek tos wraperī (3 reizes, t.i.kad ielādē lapu, kad nospiež vienu btn, kad nospiež otru btn). Kombinācijā (carsArr: Cars) "carsArr" te ir brīvi piešķirts nosaukums (var bū anything) un "Cars" ir tips, ko definējām 5.1.punktā un kas obligāti jānorāda savādāk TS rādīs kļūdu.
+  // 5. Veidojam funkciju, lai izvairītos no DRY (do not repeat yourself), t.i.lai aizvietotu kodu, kas izveido html elementus un ieliek tos wraperī (3 reizes, t.i.kad ielādē lapu, kad nospiež vienu btn, kad nospiež otru btn). Kombinācijā (carsArr: Cars) "carsArr" te ir brīvi piešķirts nosaukums (var būt anything) un "Cars" ir tips, ko definējām 5.1.punktā un kas obligāti jānorāda savādāk TS rādīs kļūdu.
   carsArr.forEach((car) => {
     carsWrapper.innerHTML += `   
     <div class="car">
       <span class="car__brand">Brand: ${car.make}</span>
       <span class="car__model">Model: ${car.model}</span>
-      <span class="car__release-Year">Year: ${car.year}</span>
+      <span class="car__release-year">Year: ${car.year}</span>
+      <div class="button-wrapper">
+        <button class="button-small js-button__edit">Edit</button>
+        <button class="button-small js-button__delete">Delete</button>
+      </div>
     </div>
     `;
   });
@@ -267,3 +271,15 @@ buttonLatest.addEventListener("click", () => {
   carsWrapper.innerHTML = ""; 
   renderCars(sortedCars);
 }) */
+
+/* // Delete funkcionalitāte
+const deleteButtons = document.querySelectorAll<HTMLButtonElement>(".js-button__delete");
+
+deleteButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    axios.delete()
+
+  //Ar filter()? Tas rada jaunu masīvu. Izdot tos objektus, kas atbilst meklētajam. Šajā gadjumā pateiktu, ka meklējais ir !== id, ko gribam dzēst);
+})
+
+//Ar filter()? Tas rada jaunu masīvu. Izdot tos objektus, kas atbilst meklētajam. Šajā gadjumā pateiktu, ka meklējais ir !== id, ko gribam dzēst); */
